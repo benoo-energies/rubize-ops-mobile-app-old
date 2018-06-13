@@ -1,0 +1,89 @@
+page-home {
+
+    h2 {
+        text-align: center;
+        font-weight: bold;
+        font-family: Raleway-Medium;
+        font-size: 2em;
+        color:map-get($colors, primary);
+    }
+    .bar-button-md, .bar-button-menutoggle-md[right] {
+        padding:0 0.6em;
+    }
+
+    ion-list.list-md {
+        margin-bottom: 0;
+    }
+    ion-card {
+        position: relative;
+        text-align: center;
+    }
+    .card-md {
+        margin-bottom: 5px;
+        margin-top: 5px;
+    }
+    .card-title {
+        position: absolute;
+        bottom:0;
+        font-size: 1.1em;
+        width: 100%;
+        font-weight: bold;
+        color:map-get($colors, primary);
+        /* background-color: rgba(0, 0, 0, 0.3); */
+        padding-top:7px;
+        padding-bottom:15px;
+    }
+
+    ion-title {
+        text-align: left;
+    }
+    .nav-logo {
+        width: 50%;
+        height: 50%;
+        margin-top: 5px;
+
+    }
+    ion-toolbar {
+        text-align: center;
+    }
+
+    ion-menu ion-title {
+        background-color:map-get($colors, primary);
+        text-align: center;
+        font-weight: bold;
+        
+        h4 {
+            color:#fff;
+            padding: 11px;
+            margin: 6px 0;
+        }
+
+    }
+    .label-md {
+        margin:20px 0;
+        font-size:1.2em;
+
+        ion-icon {
+            position: relative;
+            font-size: 1.6em;
+            top:5px;
+            /* padding-right: 10px; */
+            width: 35px;
+            text-align: center;
+        }
+    }
+
+    ion-item.active {
+        color:map-get($colors, primary);
+    }
+
+    ion-item.disabled {
+        color:map-get($colors, light);
+    }
+    button.maintenance {
+        margin-top: 20px;
+    }
+
+
+
+}

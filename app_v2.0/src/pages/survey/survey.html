@@ -1,0 +1,380 @@
+<!--
+  Generated template for the SurveyPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>Enquête Client</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list>      
+    <h4>Contact</h4>
+    <ion-item>
+      <ion-label floating>Nom : </ion-label>
+      <ion-input type="text" [(ngModel)]="clientLastname"></ion-input>
+    </ion-item> 
+    <ion-item>
+      <ion-label floating>Prénom : </ion-label>
+      <ion-input type="text" [(ngModel)]="clientFirstname"></ion-input>
+    </ion-item> 
+    <ion-item>
+      <ion-label floating>Situation : </ion-label>
+      <ion-select [(ngModel)]="clientSituation">
+        <ion-option value="Salarié privé">Salarié privé</ion-option>
+        <ion-option value="Fonctionnaire">Fonctionnaire</ion-option>
+        <ion-option value="Entrepreneur">Entrepreneur</ion-option>
+        <ion-option value="Agriculteur">Agriculteur</ion-option>
+        <ion-option value="Sans profession">Sans profession</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Téléphone : </ion-label>
+      <ion-input type="number" [(ngModel)]="clientTel"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Activité : </ion-label>
+      <ion-select [(ngModel)]="clientJob">
+        <ion-option value="Foyer">Foyer</ion-option>
+        <ion-option value="Centre de culte">Centre de culte</ion-option>
+        <ion-option value="Boutique">Boutique</ion-option>
+        <ion-option value="Produits frais / alimentation">Produits frais / alimentation</ion-option>
+        <ion-option value="Salon de coiffure">Salon de coiffure</ion-option>
+        <ion-option value="Tailleur">Tailleur</ion-option>
+        <ion-option value="Scierie">Scierie</ion-option>
+        <ion-option value="Restauration">Restauration</ion-option>
+        <ion-option value="Tourneur">Tourneur</ion-option>
+        <ion-option value="Transformation agricole">Transformation agricole</ion-option>
+        <ion-option value="Vulcanisateur">Vulcanisateur</ion-option>
+        <ion-option value="Menuisier">Menuisier</ion-option>
+        <ion-option value="Mécanicien">Mécanicien</ion-option>
+        <ion-option value="Peintre">Peintre</ion-option>
+        <ion-option value="Cordonnier">Cordonnier</ion-option>
+        <ion-option value="Centre de santé">Centre de santé</ion-option>
+        <ion-option value="Soudeur">Soudeur</ion-option>
+        <ion-option value="Education">Education</ion-option>
+        <ion-option value="IMF">IMF</ion-option>
+        <ion-option value="Autre">Autre</ion-option>          
+      </ion-select>
+    </ion-item>
+
+    <ion-item *ngIf="clientJob && clientJob == 'Autre'">
+      <ion-label floating>Autre activité : </ion-label>
+      <ion-input type="text" [(ngModel)]="clientJob2"></ion-input>
+    </ion-item> 
+
+    <ion-item *ngIf="clientJob && clientJob == 'Foyer'">
+      <ion-label floating>Type de construction : </ion-label>
+      <ion-select [(ngModel)]="clientFoyer">
+        <ion-option value="Semi-dur">Semi-dur</ion-option>
+        <ion-option value="Dur">Dur</ion-option>
+      </ion-select>
+    </ion-item> 
+
+    <h4>Equipement actuel</h4>
+    <ion-item>
+      <ion-label floating>Lampe pétrole</ion-label>
+      <ion-input type="number"  [(ngModel)]="dispo_lampe"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Torche éléctrique</ion-label>
+      <ion-input type="number"  [(ngModel)]="dispo_torche"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Bougie</ion-label>
+      <ion-input type="number"  [(ngModel)]="dispo_bougie"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Ampoule</ion-label>
+      <ion-input type="number"  [(ngModel)]="dispo_ampoule"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Ventilateur</ion-label>
+      <ion-input type="number"  [(ngModel)]="dispo_ventilateur"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Téléphone</ion-label>
+      <ion-input type="number"  [(ngModel)]="dispo_tel"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Climatisation</ion-label>
+      <ion-input type="number"  [(ngModel)]="dispo_clim"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Radio</ion-label>
+      <ion-input type="number"  [(ngModel)]="dispo_radio"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Machine à laver</ion-label>
+      <ion-input type="number"  [(ngModel)]="dispo_machine_laver"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Réfrigérateur</ion-label>
+      <ion-input type="number"  [(ngModel)]="dispo_frigo"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Congélateur</ion-label>
+      <ion-input type="number"  [(ngModel)]="dispo_congelateur"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>TV</ion-label>
+      <ion-input type="number"  [(ngModel)]="dispo_tv"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Lecteur DVD</ion-label>
+      <ion-input type="number"  [(ngModel)]="dispo_dvd"></ion-input>
+    </ion-item>
+
+    <!-- CHAMPS CONDITIONNELS -->
+
+    <ion-item  *ngIf="clientJob && clientJob == 'Salon de coiffure'">
+      <ion-label floating>Tondeuse électrique</ion-label>
+      <ion-input type="number"  [(ngModel)]="dispo_tondeuse"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="clientJob && clientJob == 'Tailleur'">
+      <ion-label floating>Machine à broder</ion-label>
+      <ion-input type="number"  [(ngModel)]="dispo_machine_broder"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="clientJob && clientJob == 'Tailleur'">
+      <ion-label floating>Machine à pleinte</ion-label>
+      <ion-input type="number"  [(ngModel)]="dispo_machine_pleinte"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="clientJob && clientJob == 'Tailleur'">
+      <ion-label floating>Machine à coudre</ion-label>
+      <ion-input type="number"  [(ngModel)]="dispo_machine_coudre"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="clientJob && clientJob == 'Scierie'">
+      <ion-label floating>Scie circulaire électrique</ion-label>
+      <ion-input type="number"  [(ngModel)]="dispo_scie_circulaire"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="clientJob && clientJob == 'Scierie'">
+      <ion-label floating>Scie sauteuse electrique</ion-label>
+      <ion-input type="number"  [(ngModel)]="dispo_scie_sauteuse"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="clientJob && clientJob == 'Scierie'">
+      <ion-label floating>Toupie</ion-label>
+      <ion-input type="number"  [(ngModel)]="dispo_toupie"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="clientJob && clientJob == 'Scierie'">
+      <ion-label floating>Raboteuse</ion-label>
+      <ion-input type="number"  [(ngModel)]="dispo_raboteuse"></ion-input>
+    </ion-item>
+    <ion-item  *ngIf="clientJob && clientJob == 'Tourneur'">
+      <ion-label floating>Fraise électrique</ion-label>
+      <ion-input type="number"  [(ngModel)]="dispo_fraise"></ion-input>
+    </ion-item>
+    <ion-item  *ngIf="clientJob && clientJob == 'Transformation agricole'">
+      <ion-label floating>Moulin électrique</ion-label>
+      <ion-input type="number"  [(ngModel)]="dispo_moulin"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="clientJob && clientJob == 'Soudeur'">
+      <ion-label floating>Arc à souder</ion-label>
+      <ion-input type="number"  [(ngModel)]="dispo_arc_souder"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="clientJob && clientJob == 'Menuisier'">
+      <ion-label floating>Ponceuse</ion-label>
+      <ion-input type="number"  [(ngModel)]="dispo_ponceuse"></ion-input>
+    </ion-item>
+    
+    <h4>Equipement souhaité</h4>
+    <ion-item>
+      <ion-label floating>Ampoule</ion-label>
+      <ion-input type="number"  [(ngModel)]="wish_ampoule"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Ventilateur</ion-label>
+      <ion-input type="number"  [(ngModel)]="wish_ventilateur"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Téléphone</ion-label>
+      <ion-input type="number"  [(ngModel)]="wish_tel"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Climatisation</ion-label>
+      <ion-input type="number"  [(ngModel)]="wish_clim"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Radio</ion-label>
+      <ion-input type="number"  [(ngModel)]="wish_radio"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Machine à laver</ion-label>
+      <ion-input type="number"  [(ngModel)]="wish_machine_laver"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Réfrigérateur</ion-label>
+      <ion-input type="number"  [(ngModel)]="wish_frigo"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Congélateur</ion-label>
+      <ion-input type="number"  [(ngModel)]="wish_congelateur"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>TV</ion-label>
+      <ion-input type="number"  [(ngModel)]="wish_tv"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Lecteur DVD</ion-label>
+      <ion-input type="number"  [(ngModel)]="wish_dvd"></ion-input>
+    </ion-item>
+
+    <!-- CHAMPS CONDITIONNELS -->
+    
+    <ion-item  *ngIf="clientJob && clientJob == 'Salon de coiffure'">
+      <ion-label floating>Tondeuse électrique</ion-label>
+      <ion-input type="number"  [(ngModel)]="wish_tondeuse"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="clientJob && clientJob == 'Tailleur'">
+      <ion-label floating>Machine à broder</ion-label>
+      <ion-input type="number"  [(ngModel)]="wish_machine_broder"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="clientJob && clientJob == 'Tailleur'">
+      <ion-label floating>Machine à pleinte</ion-label>
+      <ion-input type="number"  [(ngModel)]="wish_machine_pleinte"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="clientJob && clientJob == 'Tailleur'">
+      <ion-label floating>Machine à coudre</ion-label>
+      <ion-input type="number"  [(ngModel)]="wish_machine_coudre"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="clientJob && clientJob == 'Scierie'">
+      <ion-label floating>Scie circulaire électrique</ion-label>
+      <ion-input type="number"  [(ngModel)]="wish_scie_circulaire"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="clientJob && clientJob == 'Scierie'">
+      <ion-label floating>Scie sauteuse electrique</ion-label>
+      <ion-input type="number"  [(ngModel)]="wish_scie_sauteuse"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="clientJob && clientJob == 'Scierie'">
+      <ion-label floating>Toupie</ion-label>
+      <ion-input type="number"  [(ngModel)]="wish_toupie"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="clientJob && clientJob == 'Scierie'">
+      <ion-label floating>Raboteuse</ion-label>
+      <ion-input type="number"  [(ngModel)]="wish_raboteuse"></ion-input>
+    </ion-item>
+    <ion-item  *ngIf="clientJob && clientJob == 'Tourneur'">
+      <ion-label floating>Fraise électrique</ion-label>
+      <ion-input type="number"  [(ngModel)]="wish_fraise"></ion-input>
+    </ion-item>
+    <ion-item  *ngIf="clientJob && clientJob == 'Transformation agricole'">
+      <ion-label floating>Moulin électrique</ion-label>
+      <ion-input type="number"  [(ngModel)]="wish_moulin"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="clientJob && clientJob == 'Soudeur'">
+      <ion-label floating>Arc à souder</ion-label>
+      <ion-input type="number"  [(ngModel)]="wish_arc_souder"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="clientJob && clientJob == 'Menuisier'">
+      <ion-label floating>Ponceuse</ion-label>
+      <ion-input type="number"  [(ngModel)]="wish_ponceuse"></ion-input>
+    </ion-item>
+    
+    <h4>Production énergie</h4>
+    <p>Kit solaire :</p>
+    <ion-list radio-group [(ngModel)]="clientKit">
+      <ion-item>
+        <ion-label>Oui</ion-label>
+        <ion-radio value="oui" ></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Non</ion-label>
+        <ion-radio value="non" checked></ion-radio>
+      </ion-item>
+    </ion-list>
+
+    <ion-item *ngIf="clientKit && clientKit == 'oui'">
+      <ion-label floating>Puissance (watt) : </ion-label>
+      <ion-input type="number" [(ngModel)]="clientKitP"></ion-input>
+    </ion-item> 
+
+
+    <p>Compagnie électrique :</p>
+    <ion-list radio-group [(ngModel)]="clientCeet">
+      <ion-item>
+        <ion-label>Oui</ion-label>
+        <ion-radio value="oui" ></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Non</ion-label>
+        <ion-radio value="non" checked></ion-radio>
+      </ion-item>
+    </ion-list>
+
+    <ion-item *ngIf="clientCeet && clientCeet == 'oui'">
+        <ion-label floating>Abonnement : </ion-label>
+        <ion-select [(ngModel)]="clientCeetTranche">
+          <ion-option value="Tranche sociale">Tranche sociale</ion-option>
+          <ion-option value="Tranche 1">Tranche 1</ion-option>
+          <ion-option value="Tranche 2">Tranche 2</ion-option>
+        </ion-select>
+      </ion-item>
+
+
+    <p>Groupe electrogène :</p>
+    <ion-list radio-group [(ngModel)]="clientGE">
+      <ion-item>
+        <ion-label>Oui</ion-label>
+        <ion-radio value="oui" ></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Non</ion-label>
+        <ion-radio value="non" checked></ion-radio>
+      </ion-item>
+    </ion-list>
+
+    <ion-item *ngIf="clientGE && clientGE == 'oui'">
+      <ion-label floating>Puissance (watt) : </ion-label>
+      <ion-input type="number" [(ngModel)]="clientGEP"></ion-input>
+    </ion-item> 
+
+
+    <p>Mini-réseau :</p>
+    <ion-list radio-group [(ngModel)]="clientReseau">
+      <ion-item>
+        <ion-label>Oui</ion-label>
+        <ion-radio value="oui" ></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Non</ion-label>
+        <ion-radio value="non" checked></ion-radio>
+      </ion-item>
+    </ion-list>
+
+    <ion-item *ngIf="clientReseau && clientReseau == 'oui'">
+      <ion-label floating>Puissance (watt) : </ion-label>
+      <ion-input type="number" [(ngModel)]="clientReseauP"></ion-input>
+    </ion-item> 
+
+
+    <h4>Autres équipements</h4>
+<!--     <ion-item>
+      <ion-label floating>Opérateur : </ion-label>
+      <ion-select [(ngModel)]="telephoneOperator">
+        <ion-option value="Fonctionnaire">Moov</ion-option>
+        <ion-option value="Entrepreneur">Togocel</ion-option>
+      </ion-select>
+    </ion-item> -->
+    <ion-item>
+      <ion-label floating>Opérateur 1 : </ion-label>
+      <ion-input type="text"  [(ngModel)]="telephoneOperator"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Opérateur 2 : </ion-label>
+      <ion-input type="text"  [(ngModel)]="telephoneOperator2"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Coût recharge tél./sem.</ion-label>
+      <ion-input type="number"  [(ngModel)]="telephoneCost"></ion-input>
+    </ion-item>
+
+    <ion-input [hidden]="true" ></ion-input>
+  </ion-list>  
+  <div no-padding class="validate-btn">      
+    <button ion-button block large  [navPush]="" [navParams]='' (click)="saveSurvey()" >Valider</button>
+  </div>
+</ion-content>

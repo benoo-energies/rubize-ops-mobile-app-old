@@ -1,0 +1,43 @@
+page-history {
+  
+    h3 {
+        color:map-get($colors, primary);
+        font-size: 2.3em;
+        font-weight: bold;
+        font-family: Raleway-Medium;
+        margin-bottom: 20px;
+    }
+    .solde p {
+        text-align: center;
+        padding: 10px;
+        font-size: 2.2em;
+        border:2px solid map-get($colors, primary);
+        font-weight: bold;
+        color:map-get($colors, secondary);
+        margin: 10px 0 40px 0;
+    }
+    table {
+        font-size: 1.7em;
+        width: 100%;
+        text-align: right;
+        tr {
+            border-top:1px solid map-get($colors, light);
+            border-bottom:1px solid map-get($colors, light);
+        }
+        td:first-child {
+            text-align: left;
+            border-right:1px solid map-get($colors, light);
+            font-size: 0.8em;
+        }
+        td {
+            width: 50%;
+            padding: 10px;
+        }
+        tr.debit {
+            color:map-get($colors, danger);
+        }
+        tr.credit {
+            color:map-get($colors, success);
+        }
+    }
+}

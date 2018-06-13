@@ -1,0 +1,90 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title> 
+      <span *ngIf="cartObj" [ngPlural]="cartObj.totalProduct">
+        <ng-template ngPluralCase="=0">Panier - Aucun produit</ng-template>
+        <ng-template ngPluralCase="=1">Panier - 1 produit</ng-template>
+        <ng-template ngPluralCase="other">Panier - {{cartObj.totalProduct}} produits</ng-template>      
+      </span>
+    </ion-title> 
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <div *ngIf="cartObj" no-padding>
+    <h3>Panier : </h3>  
+    <ion-list *ngFor="let product of cartObj.products" no-padding>
+        <ion-row *ngIf="product">
+            <ion-col no-padding>              
+              <ion-card no-padding >
+                <ion-row>
+                  <ion-col col-4 class="service-img">
+                    <img src="./assets/imgs/{{product.picture}}" alt="">
+                  </ion-col>
+                  <ion-col col-8>
+                    <div class="card-title" >{{product.title}}</div>
+                    <div>
+                      <p class="price">{{product.price}} Fcfa</p>
+                      <p>(Total = {{cartObj.products[product.id].qty * product.price}} Fcfa)</p>
+                    </div>
+                  </ion-col>
+                </ion-row>
+              </ion-card>
+            </ion-col>
+          </ion-row>
+      </ion-list>
+  </div>
+    
+  <div *ngIf="cartObj && cartObj.totalProduct == 0" class="noitem"><p>Votre panier est vide</p></div>
+  
+  <div *ngIf="cartObj && cartObj.totalProduct > 0">
+
+    <div class="price">
+      <table class="total">
+        <tr class="cart-total">
+          <td  class="title">Prix total : </td>
+          <td> {{cartTotal}} Fcfa</td>
+        </tr>
+        <tr class="separator">
+          <td colspan=2></td>
+        </tr>
+        <tr class="comission">
+          <td class="title"><b>A payer : </b></td>
+          <td><b>{{cartTotal * 0.2}} Fcfa</b></td>
+        </tr>
+      </table>
+    </div>
+  
+    <div *ngIf="entrepreneurAC && (entrepreneurAC < cartTotal * 0.2)">
+      <p class="disabled"><ion-icon name="alert"></ion-icon>&nbsp; Votre solde actuel  ({{entrepreneurAC}} Fcfa) est insuffisant, veuillez modifier votre panier ou recharger votre compte.</p>
+    </div>
+    <div *ngIf="cartObj && cartObj.totalProduct > 0">
+        <div no-padding>
+          <button ion-button block color="danger" (click)="emptyCart()">Vider le panier</button>
+        </div>    
+      </div>
+    <h3>Client : </h3>
+
+    <div no-padding class="validate-btn" *ngIf="checkClientRes && checkClientRes == 'OK'" class="customerName">    
+        <h4 style="margin-top:20px;">{{clientLastname}} {{clientFirstname}}</h4>
+        
+        <!-- <button ion-button block large [disabled]="entrepreneurAC && (entrepreneurAC < cartTotal * 0.2)" [navPush]="pageClient" [navParams]='{clientTel : clientTel, cartObj:cartObj, cartTotal:cartTotal}' >Valider la vente</button> -->
+      </div>    
+
+      <ion-list  class="marginBottom">  
+        <ion-item>
+          <ion-label floating>Téléphone Client : </ion-label>
+          <ion-input type="number" [(ngModel)]="clientTel"></ion-input>
+        </ion-item> 
+        <ion-input [hidden]="true" ></ion-input>
+        <div no-padding class="validate-btn">
+          <button ion-button block large color="secondary" [disabled]="entrepreneurAC && (entrepreneurAC < cartTotal * 0.2)" (click)="checkClient()">Rechercher le client</button>
+        </div>  
+      </ion-list> 
+
+      <button ion-button block large [disabled]="entrepreneurAC && (entrepreneurAC < cartTotal * 0.2)" (click)="sendPayment(cartTotal)" class="validate-btn">Valider le paiement</button>
+
+  </div>
+
+
+</ion-content>
