@@ -12,18 +12,19 @@
 </ion-header>
 
 <ion-content padding>
-  <div class="solde">
+<!--   <div class="solde">
     <h3>Solde</h3>
     <p>{{entrepreneurAC}} Fcfa</p>
-  </div>
+  </div> -->
 
   <div class="transaction">
     <h3>Transactions</h3>
     <div *ngIf="dataHistory && dataHistory.length > 0" no-padding>
       <table>
-        <tr *ngFor="let history of dataHistory" class="debit">
+        <tr *ngFor="let history of dataHistory" class="{{history.type}}">
           <td>{{history.date}}</td>
-          <td>-{{history.amount}} Fcfa</td>
+          <td *ngIf="history.type == 'debit'">-{{history.amount}} Fcfa</td>
+          <td *ngIf="history.type == 'credit'">+{{history.amount}} Fcfa</td>
         </tr>
       </table>
     </div>

@@ -1,27 +1,26 @@
 <ion-header>
-  <ion-toolbar color="primary">
-    <ion-title>
-      <img src="./assets/imgs/logo-benoo-w.png" class="nav-logo" alt="">
-    </ion-title>
-    <ion-buttons end>
-      <button ion-button [navPush]="pageCart" [navParams]="cartObj">
-        <ion-icon name="cart"></ion-icon>
-        <span *ngIf="cartObj">{{cartObj.totalProduct}}</span>
-      </button>
-    </ion-buttons>
-    <button ion-button icon-only menuToggle right>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-  </ion-toolbar>
-</ion-header>
+    <ion-navbar color="primary">
+        <ion-title>Services</ion-title>
+        <ion-buttons end>
+            <button ion-button [navPush]="pageCart" [navParams]="cartObj">
+              <ion-icon name="cart"></ion-icon>&nbsp;
+              <span *ngIf="cartObj">{{cartObj.totalProduct}}</span>
+            </button>
+          </ion-buttons>    
+      </ion-navbar>
+  </ion-header>
 
 <ion-menu [content]="menuContent" side="right">
   <ion-content>
     <ion-title><h4>Menu</h4></ion-title>
     <ion-list>
-      <ion-item class="active"><ion-icon name="home"></ion-icon> Accueil</ion-item>
+      <ion-item (click)="navGoTo('menu')"><ion-icon name="home"></ion-icon> Accueil</ion-item>
+      <ion-item class="active"><ion-icon name="bulb"></ion-icon> Mon point de vente</ion-item>
       <!-- <ion-item [navPush]="historyPage" name="swap"><ion-icon name="swap"></ion-icon> Solde & Transactions</ion-item> -->
-      <ion-item (click)="navGoTo('history')"><ion-icon name="swap"></ion-icon> Solde & Transactions</ion-item>
+      <ion-item (click)="navGoTo('history')"><ion-icon name="swap"></ion-icon> Transactions</ion-item>
+      <ion-item (click)="navGoTo('entrepreneur-product')"><ion-icon name="cube"></ion-icon> Achats</ion-item>
+      <ion-item (click)="navGoTo('entrepreneur-order')"><ion-icon name="locate"></ion-icon> Suivi de commande</ion-item>
+      <ion-item (click)="logout()"><ion-icon name="close-circle"></ion-icon> Déconnexion</ion-item>
       <ion-item menuClose detail-none><ion-icon name="arrow-back"></ion-icon> Retour</ion-item>
     </ion-list>
   </ion-content>
@@ -29,7 +28,6 @@
 <ion-nav #menuContent></ion-nav>
     
 <ion-content no-padding>
-  <h2 >Services</h2>
   <ion-list no-padding>
     <ion-row no-padding>
         <ion-col  *ngFor="let menu of menuData" col-6>
@@ -40,8 +38,7 @@
         </ion-col>
       </ion-row>
   </ion-list>
-  <div padding>
+  <!-- <div padding>
     <button ion-button block large (click)="displaySurvey()"><ion-icon name="checkbox-outline"></ion-icon> &nbsp;&nbsp;&nbsp;Enquête client</button>
-    <button ion-button block large color="danger" class="maintenance" (click)="callMaintenance()"><ion-icon name="alert"></ion-icon> &nbsp;&nbsp;&nbsp;Appel maintenance</button>
-  </div>
+  </div> -->
 </ion-content>

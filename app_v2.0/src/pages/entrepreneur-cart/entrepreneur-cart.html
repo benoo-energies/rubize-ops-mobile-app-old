@@ -1,0 +1,50 @@
+<ion-header>
+    <ion-navbar color="primary">
+      <ion-title> 
+        <span *ngIf="entCartObj" [ngPlural]="entCartObj.totalProduct">
+          <ng-template ngPluralCase="=0">Bon de commande (0)</ng-template>
+          <ng-template ngPluralCase="other">Bon de commande ({{entCartObj.totalProduct}})</ng-template>      
+        </span>
+      </ion-title> 
+    </ion-navbar>
+  </ion-header>
+  
+  <ion-content padding>
+    <div *ngIf="entCartObj" no-padding>
+      <h3>Commande : </h3>  
+      <ion-list *ngFor="let product of entCartObj.products" no-padding>
+          <ion-row *ngIf="product">
+              <ion-col no-padding>              
+                <p>- {{entCartObj.products[product.id].qty}} x {{product.title}} : <b>{{entCartObj.products[product.id].qty * product.price}} Fcfa</b></p>
+              </ion-col>
+            </ion-row>
+        </ion-list>
+    </div>
+      
+    <div *ngIf="entCartObj && entCartObj.totalProduct == 0" class="noitem"><p>Votre commande est vide</p></div>
+    
+    <div *ngIf="entCartObj && entCartObj.totalProduct > 0">
+  
+      <div class="price">
+        <table class="total">
+          <tr class="cart-total">
+            <td  class="title">A payer : </td>
+            <td> {{entCartTotal}} Fcfa</td>
+          </tr>
+          
+        </table>
+      </div>
+
+
+        <button ion-button block large color="success"  (click)="validateOrder()" class="validate-btn">Valider la commande</button>
+    
+        <div *ngIf="entCartObj && entCartObj.totalProduct > 0">
+            <div class="cancel">
+              <button ion-button block color="danger" (click)="emptyCart()">Annuler la commande</button>
+            </div>    
+          </div>
+    </div>
+  
+  
+  </ion-content>
+  

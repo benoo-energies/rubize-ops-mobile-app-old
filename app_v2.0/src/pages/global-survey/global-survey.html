@@ -12,13 +12,23 @@
   
   <ion-content padding>
     <ion-list>    
-      <ion-item>
+     <!--  <ion-item>
         <ion-label floating>ID Enquêteur : </ion-label>
         <ion-input type="number" [(ngModel)]="idProspect"></ion-input>
-      </ion-item>     
+      </ion-item>    -->  
+      <ion-item>
+        <ion-label floating> Enquêteur : </ion-label>
+        <!-- <ion-input type="text" [(ngModel)]="village"></ion-input> -->
+        <ion-select [(ngModel)]="enqueteurId">
+          <ion-option  *ngFor="let enq of benooEnqueteurs" [value]="enq.id">{{enq.name}}</ion-option>
+        </ion-select>
+      </ion-item>
       <ion-item>
         <ion-label floating> Village enquêté : </ion-label>
-        <ion-input type="text" [(ngModel)]="village"></ion-input>
+        <!-- <ion-input type="text" [(ngModel)]="village"></ion-input> -->
+        <ion-select [(ngModel)]="village">
+          <ion-option  *ngFor="let vi of benooVillages" [value]="vi.id">{{vi.name}}</ion-option>
+        </ion-select>
       </ion-item>
       <h4>Contact</h4>
       <ion-item>
@@ -376,13 +386,13 @@
         <ion-input type="text"  [(ngModel)]="telephoneOperator2"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label floating>Coût recharge tél./sem.</ion-label>
+        <ion-label floating>Budget recharge tél./sem.</ion-label>
         <ion-input type="number"  [(ngModel)]="telephoneCost"></ion-input>
       </ion-item>
 
       <ion-input [hidden]="true" ></ion-input>
     </ion-list>  
     <div no-padding class="validate-btn">      
-      <button ion-button block large [disabled]="idProspect == null || idProspect == ''" [navPush]="" [navParams]='' (click)="saveSurvey()" >Valider</button>
+      <button ion-button block large [disabled]="enqueteurId == null ||enqueteurId == ''" [navPush]="" [navParams]='' (click)="saveSurvey()" >Valider</button>
     </div>
   </ion-content>

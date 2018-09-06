@@ -1,0 +1,88 @@
+page-entrepreneur-product {
+
+    ion-list.list-md {
+        margin-bottom: 5px;
+        ion-col.icon, ion-col.service-img {
+            padding: 0;
+        }
+            
+        .bar-button-md, .bar-button-menutoggle-md[right] {
+            padding:0 0.6em;
+        }
+        ion-card ion-col.icon.empty {
+            display: flex!important;
+            align-content: center!important;
+            align-items: center!important;
+            background-color:map-get($colors, primary);
+            color:#fff;
+            text-align: center;
+            font-size: 2.2em;
+
+            ion-icon {
+                margin:0 auto;
+            }
+        }
+
+        ion-col.icon.added {
+            .item-qty {
+                height: 34%;
+
+                span {
+                    margin:0 auto;
+                    font-size: 1.3em;
+                }
+            }
+            .item-add {
+                background-color:map-get($colors, primary);
+            }
+            .item-remove {
+                background-color:map-get($colors, danger);
+            }
+            .item-add, .item-remove {
+                height: 33%;
+                font-size: 1.5em;
+                color:#ffffff;
+            }
+    
+            div[class^="item-"] {
+                display: flex!important;
+                align-content: center!important;
+                align-items: center!important;
+    
+                ion-icon {
+                    margin:0 auto;
+                }
+    
+            }
+        } 
+    }
+    .card-md {
+        width: 100%;
+        margin:10px 0;
+    }
+
+    .card-title {
+        font-size:1.4em;
+    }
+
+    .price {
+        margin-top:0.7em;
+        font-weight: bold;
+        font-size: 1.4em;
+        color:map-get($colors, primary);        
+    }
+
+    ion-buttons .bar-button-md {
+        margin:0 0.6em;
+    }
+
+
+    .back-button-icon-md { font-size: 3rem; }
+
+    ion-header ion-icon { font-size: 2.7rem; }
+
+    ion-header .button-inner span { font-size: 2rem; }
+
+    ion-header .toolbar-title-md { font-size: 2.4rem; }
+
+}

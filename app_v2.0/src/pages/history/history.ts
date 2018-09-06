@@ -3,6 +3,8 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { Http } from '@angular/http';
 import { ToastController } from 'ionic-angular';
+
+import { GlobalVars } from "../../providers/globalVars";
 /**
  * Generated class for the HistoryPage page.
  *
@@ -17,28 +19,22 @@ import { ToastController } from 'ionic-angular';
 })
 export class HistoryPage {
 
-  entrepreneurAC:any;
   entrepreneurBenooId  :any;
+  entrepreneurTel  :any;
   dataHistory : any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public storage:Storage, public http: Http, public toastCtrl: ToastController) {
-    this.storage.get('entrepreneurBenooId').then((resp) => {
-      if(resp !== null){ 
-        this.entrepreneurBenooId = resp; 
-        this.loadHistory(resp);
-      }
-    });
-    this.storage.get('entrepreneurAC').then((resp) => {
-      if(resp !== null){ this.entrepreneurAC = resp; }
-    });
+  constructor(public navCtrl: NavController, public navParams: NavParams, public storage:Storage, public http: Http, public toastCtrl: ToastController, private global: GlobalVars) {
+    this.entrepreneurBenooId = this.global.getId();
+    this.entrepreneurTel = this.global.getTel();           
+    this.loadHistory(this.global.getId(), this.global.getTel());
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad HistoryPage');
   }
 
-  loadHistory(entrepreneurBenooId) {
-    var url = 'https://benoo-v2-api.herokuapp.com/api/entrepreneur/history/'+entrepreneurBenooId;
+  loadHistory(entrepreneurBenooId, entrepreneurTel) {
+    var url = this.global.getApiUrl()+'entrepreneur/history/'+entrepreneurBenooId+"?entrepreneurTel="+entrepreneurTel;
     console.log(entrepreneurBenooId);
     this.http.get(url)
     .map(res => res.json())
@@ -47,7 +43,7 @@ export class HistoryPage {
         console.log(data);
         console.log(data.status);
         if(data.status) {
-          this.dataHistory = data.data;
+          this.dataHistory = data.data;          
         } else {
             // Si erreur 
             console.log("History KO");

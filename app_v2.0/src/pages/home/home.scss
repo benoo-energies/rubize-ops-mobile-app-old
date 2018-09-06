@@ -12,7 +12,7 @@ page-home {
     }
 
     ion-list.list-md {
-        margin-bottom: 0;
+        margin-bottom: 16px;
     }
     ion-card {
         position: relative;
@@ -62,10 +62,11 @@ page-home {
     .label-md {
         margin:20px 0;
         font-size:1.2em;
+        padding-bottom: 5px;
 
         ion-icon {
             position: relative;
-            font-size: 1.6em;
+            font-size: 1.4em;
             top:5px;
             /* padding-right: 10px; */
             width: 35px;
@@ -84,6 +85,15 @@ page-home {
         margin-top: 20px;
     }
 
+    
+    .list-md { margin-top: 39px; }
 
+    .back-button-icon-md { font-size: 3rem; }
+
+    ion-header ion-icon { font-size: 2.7rem; }
+
+    ion-header .button-inner span { font-size: 2rem; }
+
+    ion-header .toolbar-title-md { font-size: 2.4rem; }
 
 }

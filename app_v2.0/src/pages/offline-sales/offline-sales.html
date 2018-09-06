@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-navbar color="primary">
+      <ion-title>Services</ion-title>
+      <ion-buttons end>
+          <!-- <button ion-button [navPush]="pageCart" [navParams]="offlineCart"> -->
+          <button ion-button>
+            <ion-icon name="cart"></ion-icon>&nbsp;
+            <span *ngIf="offlineCart">{{offlineCart.totalProduct}}</span>
+          </button>
+        </ion-buttons>    
+    </ion-navbar>
+</ion-header>
+  
+<ion-content no-padding>
+<ion-list no-padding>
+  <ion-row no-padding>
+      <ion-col  *ngFor="let menu of menuData; let i= index" col-6>
+        <ion-card no-padding [navPush]="offlineProductPage" [navParams]='{typeId : i, typeName : menu.title}'>
+          <img src="./assets/imgs/{{menu.picture}}" alt="">
+          <div class="card-title" >{{menu.title}}</div>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+</ion-list>
+<!-- <div padding>
+  <button ion-button block large (click)="displaySurvey()"><ion-icon name="checkbox-outline"></ion-icon> &nbsp;&nbsp;&nbsp;Enquête client</button>
+</div> -->
+</ion-content>

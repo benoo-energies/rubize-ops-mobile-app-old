@@ -32,18 +32,18 @@
                     <div class="price">{{service.price_fcfa}} Fcfa</div>
                   </ion-col>
                   <ion-col *ngIf="cartObj && cartObj.products[service.id]; else templateName" col-2 class="icon added" >
-                      <div class="item-add" (click)="addItemToCart(cartObj, service.id, service.title, service.price_fcfa, service.picture)">
+                      <div class="item-add" (click)="addItemToCart(cartObj, service.id, service.title, service.price_fcfa, service.picture, service.decimal)">
                         <ion-icon name="add"></ion-icon>
                       </div>
                       <div class="item-qty">
                           <span>{{cartObj.products[service.id].qty}}</span>
                       </div>
-                      <div class="item-remove" (click)="removeItemToCart(cartObj, service.id, service.title, service.price_fcfa, service.picture)">
+                      <div class="item-remove" (click)="removeItemToCart(cartObj, service.id, service.title, service.price_fcfa, service.picture, service.decimal)">
                           <ion-icon name="remove"></ion-icon>
                       </div>
                   </ion-col>
                   <ng-template #templateName>                    
-                    <ion-col col-2 class="empty icon" (click)="addItemToCart(cartObj, service.id, service.title, service.price_fcfa, service.picture)">
+                    <ion-col col-2 class="empty icon" (click)="addItemToCart(cartObj, service.id, service.title, service.price_fcfa, service.picture, service.decimal)">
                         <ion-icon name="add"></ion-icon>
                     </ion-col>
                   </ng-template>

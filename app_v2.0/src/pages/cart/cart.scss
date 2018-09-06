@@ -1,4 +1,9 @@
 page-cart {
+    p {
+        font-size: 1.3em;
+        margin-top:0.5em;
+        margin-bottom:0.5em;
+    }
 
     h3 {
         color:map-get($colors, primary);
@@ -17,6 +22,16 @@ page-cart {
         margin-top:30px;
         margin-bottom:30px;
     }
+
+    div.item-qty {
+        background-color: map-get($colors, light);
+        margin-top: 22px;
+        font-size: 1.7em;
+        border-radius: 50px;
+        text-align: center;
+        padding: 5px 0 8px 0;        
+    }
+
     ion-list.list-md {
         margin-bottom: 5px;
         ion-col.icon, ion-col.service-img {
@@ -153,4 +168,18 @@ page-cart {
             margin-bottom:20px;
         }
     }
+
+    .cancel {
+        margin-top: 20px;
+    }    
+
+    .back-button-icon-md { font-size: 3rem; }
+
+    ion-header ion-icon { font-size: 2.7rem; }
+
+    ion-header .button-inner span { font-size: 2rem; }
+
+    ion-header .toolbar-title-md { font-size: 2.4rem; }
+
+
 }

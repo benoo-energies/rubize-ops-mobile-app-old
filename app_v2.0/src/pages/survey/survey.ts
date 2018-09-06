@@ -5,6 +5,8 @@ import { ToastController } from 'ionic-angular';
 import { Http } from '@angular/http';
 import { Storage } from '@ionic/storage';
 import { AlertController } from 'ionic-angular';
+
+import { GlobalVars } from "../../providers/globalVars";
 /**
  * Generated class for the SurveyPage page.
  *
@@ -18,7 +20,7 @@ import { AlertController } from 'ionic-angular';
   templateUrl: 'survey.html',
 })
 export class SurveyPage {
-
+  entrepreneurTel : any;
   entrepreneurBenooId  :any;
   clientLastname : any;
   clientFirstname : any;
@@ -88,10 +90,9 @@ export class SurveyPage {
   latitude : any;
   longitude : any;
 
-  constructor(public navCtrl: NavController, public storage: Storage, public http: Http, public navParams: NavParams, public toastCtrl: ToastController, public loading: LoadingController, private alertCtrl: AlertController) {
-    this.storage.get('entrepreneurBenooId').then((resp) => {
-      if(resp !== null){ this.entrepreneurBenooId = resp; }
-    });         
+  constructor(public navCtrl: NavController, public storage: Storage, public http: Http, public navParams: NavParams, public toastCtrl: ToastController, public loading: LoadingController, private alertCtrl: AlertController, private global: GlobalVars) {
+    this.entrepreneurBenooId = this.global.getId();
+    this.entrepreneurTel = this.global.getTel();           
   }
 
   ionViewDidLoad() {
@@ -100,8 +101,7 @@ export class SurveyPage {
 
   saveSurvey() {
     console.log('SAVE SURVEY');
-    var link = 'https://benoo-v2-api.herokuapp.com/api/survey/'+this.entrepreneurBenooId+'/create';
-    //var link = 'http://benoo-api:8888/api/survey/'+this.entrepreneurBenooId+'/create';
+    var link = this.global.getApiUrl()+'survey/'+this.entrepreneurBenooId+'/create';
 
     let loader = this.loading.create({
       content: 'Enregistrement de l\'enquête...',
@@ -109,6 +109,7 @@ export class SurveyPage {
     loader.present(); 
 
     var data = {
+      entrepreneurTel : this.entrepreneurTel,
       clientLastname : this.clientLastname,
       clientFirstname : this.clientFirstname,
       clientSituation : this.clientSituation,

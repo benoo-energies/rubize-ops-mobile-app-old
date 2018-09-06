@@ -7,6 +7,7 @@ import { Geolocation } from '@ionic-native/geolocation';
 import { AlertController } from 'ionic-angular';
 import { Network } from '@ionic-native/network';
 
+import { GlobalVars } from "../../providers/globalVars";
 /**
  * Generated class for the GlobalSurveyPage page.
  *
@@ -22,6 +23,8 @@ import { Network } from '@ionic-native/network';
 export class GlobalSurveyPage {
   
   idProspect : any;
+  benooEnqueteurs : any;
+  enqueteurId : any;
   village : any;
   clientLastname : any;
   clientFirstname : any;
@@ -91,9 +94,12 @@ export class GlobalSurveyPage {
   latitude : any;
   longitude : any;
   onlineStatus:any;
+  benooVillages:any;
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http,public toastCtrl: ToastController, public loading: LoadingController,private geolocation: Geolocation, private alertCtrl: AlertController, private network: Network) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http,public toastCtrl: ToastController, public loading: LoadingController,private geolocation: Geolocation, private alertCtrl: AlertController, private network: Network, private global: GlobalVars) {
+    this.loadVillages();
+    this.loadEnqueteurs();
     this.geolocation.getCurrentPosition().then((resp) => {
       this.latitude = resp.coords.latitude;
       this.longitude = resp.coords.longitude;
@@ -108,7 +114,18 @@ export class GlobalSurveyPage {
     }
     
   ionViewDidLoad() {
+
     console.log('ionViewDidLoad GlobalSurveyPage');
+  }
+  
+  loadVillages() {
+    this.benooVillages = JSON.parse(localStorage.getItem('benoo_villages'));
+    console.log(this.benooVillages);
+  }
+  
+  loadEnqueteurs() {
+    this.benooEnqueteurs = JSON.parse(localStorage.getItem('benoo_enqueteurs'));
+    console.log(this.benooEnqueteurs);
   }
 
 
@@ -116,8 +133,7 @@ export class GlobalSurveyPage {
     console.log('SAVE SURVEY');
     this.onlineStatus = window.navigator.onLine;
     console.log(this.onlineStatus);    
-    var link = 'https://benoo-v2-api.herokuapp.com/api/survey-prospect/create';
-    //var link = 'http://benoo-api:8888/api/survey-prospect/create';
+    var link = this.global.getApiUrl()+'survey-prospect/create';
 
     let loader = this.loading.create({
       content: 'Enregistrement de l\'enquête...',
@@ -126,7 +142,8 @@ export class GlobalSurveyPage {
 
     var data = {
   
-      idProspect : this.idProspect,
+      //idProspect : this.idProspect,
+      enqueteurId : this.enqueteurId,
       village : this.village,
       clientLastname : this.clientLastname,
       clientFirstname : this.clientFirstname,

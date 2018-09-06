@@ -1,0 +1,40 @@
+page-offline-orders {
+    .button-inner {
+        font-size: 0.9em;
+    }
+
+    ion-card {
+
+        .card-title h3 {
+            font-size: 1.3em;
+            font-weight: bold;
+            text-align: center;
+            background-color: map-get($colors, secondary);
+            color: white;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        .order-info p {
+            font-size: 1.2em;
+            padding-bottom: 0;
+            padding-top: 0;
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+        .order-info ul {
+            margin-top: 2px;
+            font-size: 1.1em;
+        }
+        
+    }
+
+
+    .back-button-icon-md { font-size: 3rem; }
+
+    ion-header ion-icon { font-size: 2.7rem; }
+
+    ion-header .button-inner span { font-size: 2rem; }
+
+    ion-header .toolbar-title-md { font-size: 2.4rem; }
+
+}

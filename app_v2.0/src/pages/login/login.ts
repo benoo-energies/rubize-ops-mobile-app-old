@@ -1,3 +1,5 @@
+import { OfflineSalesPage } from './../offline-sales/offline-sales';
+import { OfflineOrdersPage } from './../offline-orders/offline-orders';
 import { HomePage } from './../home/home';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
@@ -9,6 +11,8 @@ import { ToastController } from 'ionic-angular';
 import { LoadingController } from 'ionic-angular';
 import { GlobalSurveyPage } from './../global-survey/global-survey'
 import { Network } from '@ionic-native/network';
+import { GlobalVars } from "../../providers/globalVars";
+import { MenuPage } from './../menu/menu';
 /**
  * Generated class for the LoginPage page.
  *
@@ -26,24 +30,40 @@ export class LoginPage {
   public xmlItems : any;
   entrepreneurTel :any;
   entrepreneurPin :any;
-  entrepreneurAC  :any;
-  merchantId  :any;
+  entrepreneurBenooId:any;
+  
   offlineData:any;
+  offlineSales:any;
   onlineStatus:any;
-
+  
   // TODO : Ajouter les contrôles sur les champs saisis pour le login
-
-  constructor(public navCtrl: NavController, public navParams: NavParams, private storage:Storage,public http: Http,public toastCtrl: ToastController, public loading: LoadingController, private network: Network) {
+  
+  constructor(public navCtrl: NavController, public navParams: NavParams, private storage:Storage,public http: Http,public toastCtrl: ToastController, public loading: LoadingController, private network: Network, private global: GlobalVars) {
+    
+    /* this.entrepreneurBenooId = this.global.getId(); */
+    
     var item:any = { products:[],totalProduct:0};
     storage.set('cart', item);
+    this.storage.get('offlineCart').then((resp) => {
+      if(resp == null){
+        storage.set('offlineCart', item);
+        console.log(resp);
+      }
+    });    
     if(localStorage.getItem('offlineSurvey') === null) {
       this.offlineData = JSON.stringify({surveys:[]});
       localStorage.setItem('offlineSurvey', this.offlineData);
     } else {
       this.offlineData = JSON.parse(localStorage.getItem('offlineSurvey'));
     }        
-
-    this.onlineStatus = window.navigator.onLine;
+    
+    this.storage.get('entrepreneurBenooId').then((resp) => {
+      if(resp !== null){
+        this.entrepreneurBenooId = resp;
+        console.log(resp);
+      }
+    });
+    this.loadSurveyData();
   }
 
   ionViewWillEnter() {
@@ -65,9 +85,16 @@ export class LoginPage {
       }
     }  
     this.onlineStatus = window.navigator.onLine;
+      
   }
 
   ionViewDidEnter() {
+    this.storage.get('offlineSales').then((resp) => {
+      if(resp !== null){
+        this.offlineSales = resp;
+        console.log(resp);
+      }
+    });
     this.network.onConnect().subscribe(data => {
       this.onlineStatus = true;
     }, error => console.error(error));
@@ -84,22 +111,70 @@ export class LoginPage {
     } else {
       this.offlineData = JSON.parse(localStorage.getItem('offlineSurvey'));
     }  
+    this.storage.get('offlineSales').then((resp) => {
+      if(resp !== null){
+        this.offlineSales = resp;
+        console.log(resp);
+      }
+    });
+
 
     this.onlineStatus = window.navigator.onLine;
   }
 
   displaySurvey() {
-    console.log("SURVEY");
     this.navCtrl.push(GlobalSurveyPage);
   }
+
+
+  offlineOrders() {
+    this.navCtrl.push(OfflineOrdersPage);
+  }
+
+
+  displayOfflineSales() {
+    this.navCtrl.push(OfflineSalesPage);
+  }
+
+  loadSurveyData() {
+      // SI CONNEXION Récupération de la liste des villages
+      var link = this.global.getApiUrl()+'survey/villages';
+      this.http.get(link)
+      .map(res => res.json())
+      .subscribe((data)=> {
+        console.log(data);
+        if(data && data.status) {
+          let villages = JSON.stringify(data.data);
+          localStorage.setItem('benoo_villages', villages);
+          console.log(villages);
+        }
+      }, error => {
+        console.log(error);
+      });
+
+      // SI CONNEXION Récupération de la liste des enqueteurs
+      var link = this.global.getApiUrl()+'survey/enqueteurs';
+      this.http.get(link)
+      .map(res => res.json())
+      .subscribe((data)=> {
+        console.log(data);
+        if(data && data.status) {
+          let enqueteurs = JSON.stringify(data.data);
+          localStorage.setItem('benoo_enqueteurs', enqueteurs);
+          console.log(enqueteurs);
+        }
+      }, error => {
+        console.log(error);
+      });
+  }
+
 
   postOfflineSurvey() {
     let loader = this.loading.create({
       content: 'Synchronisation en cours...',
     });      
     loader.present();      
-    var link = 'https://benoo-v2-api.herokuapp.com/api/survey-prospect/create';
-    //var link = 'http://benoo-api:8888/api/survey-prospect/create';
+    var link = this.global.getApiUrl()+'survey-prospect/create';
     var errorSurvey  = [];
 
     for (let i = 0; i < this.offlineData.surveys.length; i++) {
@@ -120,6 +195,7 @@ export class LoginPage {
         if(errorSurvey.length == 0) {
           this.offlineData = JSON.stringify({surveys:[]});
           localStorage.setItem('offlineSurvey', this.offlineData);
+          
           let toast = this.toastCtrl.create({
             message: "Enquête(s) synchronisée(s) avec succès !",
             duration: 5000,
@@ -145,6 +221,8 @@ export class LoginPage {
     }    
   }
 
+
+
   parseXML(data) {
     return new Promise(resolve =>
     {
@@ -163,17 +241,13 @@ export class LoginPage {
   }
 
   checkConnection() {
-    var entrepreneurTel:number = this.entrepreneurTel;
-    var entrepreneurPin:string = this.entrepreneurPin;
 
- 
     let loader = this.loading.create({
       content: 'Connexion en cours...',
     });      
     loader.present();  
     
-    var link = "https://benoo-v2-api.herokuapp.com/api/entrepreneur/login";    
-    //var link = "http://benoo-api:8888/api/entrepreneur/login";    
+    var link = this.global.getApiUrl()+"entrepreneur/login";    
 
     var data = {
       entrepreneurTel : this.entrepreneurTel,
@@ -185,15 +259,20 @@ export class LoginPage {
     {
         if(data.status == true) {
           loader.dismiss(); 
-          this.storage.set('entrepreneurAC', data.data.balance[0]);
-          this.storage.set('entrepreneurRC', data.data.currency);
-          this.storage.set('entrepreneurTel', data.data.idClient);
-          this.storage.set('merchantId', data.data.merchantId);
-          this.storage.set('entrepreneurId', data.data.idClient);          
+          
           this.storage.set('entrepreneurBenooId', data.data.entrepreneurBenooId);
-          this.storage.set('entrepreneurPin', this.entrepreneurPin);
-          this.navCtrl.push(HomePage);
-        } else {
+          /* this.storage.set('entrepreneurPin', this.entrepreneurPin); */
+          //
+          this.storage.set('benoo_entrepreneur_id', data.data.benoo_entrepreneur_id);
+          this.storage.set('benoo_entrepreneur_tel', data.data.benoo_entrepreneur_tel);
+          this.global.setId(data.data.benoo_entrepreneur_id)
+          this.global.setTel(data.data.benoo_entrepreneur_tel)
+
+          console.log("ID : " + this.global.getId());
+          console.log("TEL : " + this.global.getTel());
+          //this.navCtrl.push(MenuPage);
+          this.navCtrl.setRoot(MenuPage);
+        } else {  
           loader.dismiss();
           let toast = this.toastCtrl.create({
             message: data.error,

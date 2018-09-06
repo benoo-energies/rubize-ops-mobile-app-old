@@ -8,6 +8,9 @@ import { ToastController } from 'ionic-angular';
 import { LoadingController } from 'ionic-angular';
 import 'rxjs/add/operator/map';
 import xml2js from 'xml2js';
+import { GlobalVars } from "../../providers/globalVars";
+import { AlertController } from 'ionic-angular';
+import { MenuPage } from './../menu/menu';
 
 /**
  * Generated class for the CartPage page.
@@ -27,23 +30,19 @@ export class CartPage {
   cartTotal       :any;
   entrepreneurTel :any;
   entrepreneurPin :any;
-  entrepreneurAC  :any;
-  entrepreneurRC  :any;
   entrepreneurBenooId  :any;
-  merchantId      :any;
   clientTel       :any;
   pageClient      :any;
   checkClientRes  :any;
   clientLastname  :any;
   clientFirstname  :any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage, private modal:ModalController, public http: Http, public toastCtrl: ToastController, public loading: LoadingController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage, private modal:ModalController, public http: Http, public toastCtrl: ToastController, public loading: LoadingController, private global: GlobalVars, private alertCtrl: AlertController) {
     this.cartTotal = 0;
     this.storage.get('cart').then((resp) => {
       console.log(resp);
       if(resp !== null){
         this.cartObj = resp;
-        console.log("CART FOREACH", this.cartObj);
 /*         this.cartObj.products.forEach(obj => {
           console.log("obj");
           console.log(obj);
@@ -51,32 +50,14 @@ export class CartPage {
           console.log(this.cartTotal);
         });   */        
         this.cartObj.products.forEach(function (obj) {
-          console.log(obj);
           if( obj && obj.price && obj.qty) { this.cartTotal+= obj.price * obj.qty; }
-          console.log(this.cartTotal);
         }, this);        
       }
     });    
     this.pageClient = ClientPage;
 
-    this.storage.get('entrepreneurTel').then((resp) => {
-      if(resp !== null){ this.entrepreneurTel = resp; }
-    });
-    this.storage.get('entrepreneurPin').then((resp) => {
-      if(resp !== null){ this.entrepreneurPin = resp; }
-    });
-    this.storage.get('entrepreneurAC').then((resp) => {
-      if(resp !== null){ this.entrepreneurAC = resp; }
-    });
-    this.storage.get('entrepreneurRC').then((resp) => {
-      if(resp !== null){ this.entrepreneurRC = resp; }
-    });
-    this.storage.get('merchantId').then((resp) => {
-      if(resp !== null){ this.merchantId = resp; }
-    });
-    this.storage.get('entrepreneurBenooId').then((resp) => {
-      if(resp !== null){ this.entrepreneurBenooId = resp; }
-    });
+    this.entrepreneurBenooId = this.global.getId();
+    this.entrepreneurTel = this.global.getTel();
     this.checkClientRes = "KO";
 
   }
@@ -106,8 +87,7 @@ export class CartPage {
   }
 
   checkClient() {
-    var url = 'https://benoo-v2-api.herokuapp.com/api/customer/'+this.entrepreneurBenooId+'/'+this.clientTel;
-    //var url = 'http://benoo-api:8888/api/customer/'+this.entrepreneurBenooId+'/'+this.clientTel;
+    var url = this.global.getApiUrl()+'customer/'+this.entrepreneurBenooId+'/'+this.clientTel+"?entrepreneurTel="+this.entrepreneurTel;
     console.log(this.clientTel);
     console.log(this.entrepreneurBenooId);
     // Requete pour checker si le client existe
@@ -158,76 +138,90 @@ export class CartPage {
 
   sendPayment() {
     console.log('PAIEMENT');
-    var comission:number = this.cartTotal * 0.2;
-    var description:string = "";
-    var referenceId:string = "";
+
+    let alert = this.alertCtrl.create({
+      title: "Validation vente",
+      message: 'Confirmez-vous le paiement de votre vente ?',
+      buttons: [
+        {
+          text: 'Annuler',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Confirmer',
+          handler: () => {
+
+
+            var comission:number = this.cartTotal * 0.2;
     
-    let loader = this.loading.create({
-      content: 'Enregistrement de la vente...',
-    });      
-    loader.present();  
-    //https:///22806.tagpay.fr/api/tpdebit.php?merchantid=2631806354846560&password=ef9901d3ccfef8128f61cbc92ec1baf8&client=33660866178&PIN=1234&amount=3&currency=952&description=descbenooservice&referenceid=idtxbenoo
+            let loader = this.loading.create({
+              content: 'Enregistrement de la vente...',
+            });      
+            loader.present();  
+        
+            var link = this.global.getApiUrl()+'order/'+this.entrepreneurBenooId+'/create';
+        
+            var data = {
+              entrepreneurTel : this.entrepreneurTel,
+              entrepreneurPin : this.entrepreneurPin,
+              entrepreneurId : this.entrepreneurBenooId,
+              clientTel : this.clientTel,
+              products : this.cartObj.products,
+              total : this.cartTotal,
+              comission : comission
+            }    
+        
+            this.http.post(link, data)
+            .map(res => res.json())
+            .subscribe((data)=>
+            {
+                console.log(data);
+                if(data.status == true) {          
+                  loader.dismiss();
+                  let toast = this.toastCtrl.create({
+                    message: "Votre vente a bien été enregistrée.",
+                    duration: 5000,
+                    position: 'bottom',
+                    cssClass:"success"
+                  });           
+                  toast.present();
+                  this.cartObj = { products:[],totalProduct:0};
+                  this.storage.set('cart', this.cartObj);   
 
-    //var url:any = "https:///22806.tagpay.fr/api/tpdebit.php?merchantid="+this.merchantId+"&password="+merchantPassword+"&client="+this.entrepreneurTel+"&pin="+this.entrepreneurPin+"&amount="+commission+"&currency="+this.entrepreneurRC+"&description="+description+"&referenceid="+referenceId;
-
-    var link = 'https://benoo-v2-api.herokuapp.com/api/order/'+this.entrepreneurBenooId+'/create';
-    //var link = 'http://benoo-api:8888/api/order/'+this.entrepreneurBenooId+'/create';
-
-    var data = {
-      merchantId : this.merchantId,
-      entrepreneurTel : this.entrepreneurTel,
-      entrepreneurPin : this.entrepreneurPin,
-      entrepreneurRC : this.entrepreneurRC,
-      entrepreneurId : this.entrepreneurBenooId,
-      clientTel : this.clientTel,
-      description : description,
-      referenceId : referenceId,
-      products : this.cartObj.products,
-      total : this.cartTotal,
-      comission : comission
-    }    
-
-    this.http.post(link, data)
-    .map(res => res.json())
-    .subscribe((data)=>
-    {
-        console.log(data);
-        if(data.status == true) {          
-          loader.dismiss();
-          let toast = this.toastCtrl.create({
-            message: "Votre vente a bien été enregistrée.",
-            duration: 5000,
-            position: 'bottom',
-            cssClass:"success"
-          });           
-          toast.present();
-          this.cartObj = { products:[],totalProduct:0};
-          this.storage.set('cart', this.cartObj);   
-          this.storage.set('entrepreneurAC', this.entrepreneurAC-comission);
-
-        } else {
-          loader.dismiss();
-          let toast = this.toastCtrl.create({
-            message: data.error,
-            duration: 5000,
-            position: 'bottom',
-            cssClass:"danger"
-          });           
-          toast.present();
+                  this.navCtrl.setRoot(MenuPage).then(()=>{
+                    this.navCtrl.push(HomePage);
+                  });
+        
+                } else {
+                  loader.dismiss();
+                  let toast = this.toastCtrl.create({
+                    message: data.error,
+                    duration: 5000,
+                    position: 'bottom',
+                    cssClass:"danger"
+                  });           
+                  toast.present();
+                }
+            }, error => {
+              console.log(error);
+                console.log("Impossible d'enregistrer la vente !");
+                loader.dismiss();
+                let toast = this.toastCtrl.create({
+                  message: 'Impossible d\'enregistrer la vente, veuillez réessayer. Si le problème persiste contactez votre support Benoo Energies.',
+                  duration: 5000,
+                  position: 'bottom',
+                  cssClass:"danger"
+                });           
+                toast.present();
+            });
+          }
         }
-    }, error => {
-      console.log(error);
-        console.log("Impossible d'envoyer l'enquête !");
-        loader.dismiss();
-        let toast = this.toastCtrl.create({
-          message: 'Impossible d\'enregistrer la vente, veuillez réessayer. Si le problème persiste contactez votre support Benoo Energies.',
-          duration: 5000,
-          position: 'bottom',
-          cssClass:"danger"
-        });           
-        toast.present();
-    }); 
-
+      ]
+    });
+    alert.present();
   }
 
 

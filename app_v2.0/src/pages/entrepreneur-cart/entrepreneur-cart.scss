@@ -1,0 +1,185 @@
+page-entrepreneur-cart {
+    p {
+        font-size: 1.3em;
+        margin-top:0.5em;
+        margin-bottom:0.5em;
+    }
+
+    h3 {
+        color:map-get($colors, primary);
+        font-size: 2.3em;
+        font-weight: bold;
+        font-family: Raleway-Medium;
+        margin-top: 20px;
+        margin-bottom: 0;
+    }    
+    .noitem {
+        color:map-get($colors, secondary);
+        text-align: center;
+        font-size: 1.8em;
+    }
+    div.price {
+        margin-top:30px;
+        margin-bottom:30px;
+    }
+
+    div.item-qty {
+        background-color: map-get($colors, light);
+        margin-top: 22px;
+        font-size: 1.7em;
+        border-radius: 50px;
+        text-align: center;
+        padding: 5px 0 8px 0;        
+    }
+
+    ion-list.list-md {
+        margin-bottom: 5px;
+        ion-col.icon, ion-col.service-img {
+            padding: 0;
+        }
+        
+        ion-card ion-col.icon.empty {
+            display: flex!important;
+            align-content: center!important;
+            align-items: center!important;
+            background-color:map-get($colors, primary);
+            color:#fff;
+            text-align: center;
+            font-size: 2.2em;
+
+            ion-icon {
+                margin:0 auto;
+            }
+        }
+        ion-col.icon.added {
+            .item-qty {
+                height: 34%;
+
+                span {
+                    margin:0 auto;
+                    font-size: 1.3em;
+                }
+            }
+            .item-add {
+                background-color:map-get($colors, primary);
+            }
+            .item-remove {
+                background-color:map-get($colors, danger);
+            }
+            .item-add, .item-remove {
+                height: 33%;
+                font-size: 1.5em;
+                color:#ffffff;
+            }
+    
+            div[class^="item-"] {
+                display: flex!important;
+                align-content: center!important;
+                align-items: center!important;
+    
+                ion-icon {
+                    margin:0 auto;
+                }
+    
+            }
+        } 
+    }
+    .card-md {
+        width: 100%;
+        margin:5px 0;
+    }
+
+    .card-title {
+        font-size:1.2em;
+    }
+
+    .price {
+        margin-top:0.4em;
+        font-weight: bold;
+        font-size: 1.3em;
+        color:map-get($colors, primary);
+    }    
+
+
+    table.total {
+        font-size : 1.2em;
+        font-weight: normal;
+        width: 100%;
+        margin-bottom: 20px;
+        margin-top: 20px;
+
+        td {
+            width: 50%;
+            text-align: right;
+        }
+        .separator {
+            height: 7px;
+        }
+        td:first-child {
+            text-align: center;
+        }
+        .cart-total {
+            border:1px solid map-get($colors, secondary);
+            color:map-get($colors, dark);
+            td {
+                padding:10px;
+            }            
+            .title {
+                background-color: map-get($colors, secondary);
+                font-size: 0.9em;
+                color:#ffffff;
+            }
+        }
+        
+        .comission {
+            font-weight: bold;
+            border:1px solid map-get($colors, secondary);
+            color:map-get($colors, dark);
+            td {
+                padding:10px;
+            }
+            .title {
+                background-color: map-get($colors, primary);
+                font-size: 0.9em;
+                color:#ffffff;
+            }
+        }
+    }
+
+    p.disabled {
+        color:map-get($colors, danger);
+        text-align: center;
+        font-size: 1.2em;
+        font-weight: bold;
+    }    
+    .validate-btn {
+        margin-top: 20px;
+    }
+
+    .customerName {
+        text-align:center;
+        h4{
+            font-weight:bold;
+            margin-bottom:20px;
+            font-size:1.6em;
+            margin-top:20px;
+        }
+        button {
+            margin-bottom:20px;
+        }
+    }
+
+    .cancel {
+        margin-top: 20px;
+    }
+
+
+    .back-button-icon-md { font-size: 3rem; }
+
+    ion-header ion-icon { font-size: 2.7rem; }
+
+    ion-header .button-inner span { font-size: 2rem; }
+
+    ion-header .toolbar-title-md { font-size: 2.4rem; }
+
+}

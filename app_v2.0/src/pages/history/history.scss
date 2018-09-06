@@ -40,4 +40,14 @@ page-history {
             color:map-get($colors, success);
         }
     }
+
+
+    .back-button-icon-md { font-size: 3rem; }
+
+    ion-header ion-icon { font-size: 2.7rem; }
+
+    ion-header .button-inner span { font-size: 2rem; }
+
+    ion-header .toolbar-title-md { font-size: 2.4rem; }
+
 }

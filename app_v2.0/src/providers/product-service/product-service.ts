@@ -5,6 +5,7 @@ import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/catch';
 import { Storage } from '@ionic/storage';
 
+import { GlobalVars } from "../globalVars";
 /*
   Generated class for the ProductServiceProvider provider.
 
@@ -14,15 +15,18 @@ import { Storage } from '@ionic/storage';
 @Injectable()
 export class ProductServiceProvider {
   cartObj :any;
-  constructor(public http: Http, public storage:Storage) {
+  entrepreneurBenooId :any;
+  entrepreneurTel :any;
+  orders :any;
+  constructor(public http: Http, public storage:Storage, private global: GlobalVars) {
     console.log('Hello ProductServiceProvider Provider');
     this.storage.get('cart').then((resp) => {
       if(resp !== null){ this.cartObj = resp; }
-    });    
+    });      
   }
-  getCategories() {
-    var url = 'https://benoo-v2-api.herokuapp.com/api/services/types';
-    //var url = 'http://benoo-api:8888/api/services/types';
+
+  getCategories(entrepreneurId, entrepreneurTel) {
+    var url = this.global.getApiUrl()+'services/types/' + entrepreneurId +"?entrepreneurTel="+ entrepreneurTel;
     var response = this.http.get(url)
     .do((res : any ) => console.log(res.json()))
     .map((res : any ) => res.json());
@@ -32,9 +36,8 @@ export class ProductServiceProvider {
     return response;
   }
 
-  getProductByType(typeId) {
-    var url:string = 'https://benoo-v2-api.herokuapp.com/api/services/'+typeId;
-    //var url:string = 'http://benoo-api:8888/api/services/'+typeId;
+  getProductByType(typeId, entrepreneurId, entrepreneurTel) {
+    var url:string = this.global.getApiUrl()+'services/'+typeId+ "/"+ entrepreneurId+"?entrepreneurTel="+entrepreneurTel;
     var response:any = this.http.get(url)
     .do((res : any ) => console.log(res.json()))
     .map((res : any ) => res.json());
@@ -43,4 +46,15 @@ export class ProductServiceProvider {
 
     return response;    
   }
+
+
+  loadOfflineOrders() {
+    this.storage.get('entrepreneur_orders').then((resp) => {
+      console.log(resp);
+      if(resp !== null){
+        return resp;
+      }    
+    });
+  }
+
 }

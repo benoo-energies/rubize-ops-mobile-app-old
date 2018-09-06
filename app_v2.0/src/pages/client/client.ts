@@ -7,6 +7,7 @@ import { ToastController } from 'ionic-angular';
 import { LoadingController } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
 
+import { GlobalVars } from "../../providers/globalVars";
 /**
  * Generated class for the ClientPage page.
  *
@@ -20,6 +21,7 @@ import { AlertController } from 'ionic-angular';
   templateUrl: 'client.html',
 })
 export class ClientPage {
+  entrepreneurTel:any;
   params: any;
   cartObj: any;
   entrepreneurBenooId  :any;
@@ -92,13 +94,14 @@ export class ClientPage {
   longitude : any;
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage, public http: Http, private geolocation: Geolocation, public toastCtrl: ToastController, public loading: LoadingController, private alertCtrl: AlertController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage, public http: Http, private geolocation: Geolocation, public toastCtrl: ToastController, public loading: LoadingController, private alertCtrl: AlertController, private global: GlobalVars) {
     this.params = this.navParams.data;
     this.clientTel = this.params.clientTel;
     this.http = http;
-    this.storage.get('entrepreneurBenooId').then((resp) => {
-      if(resp !== null){ this.entrepreneurBenooId = resp; }
-    });      
+
+    this.entrepreneurBenooId = this.global.getId();
+    this.entrepreneurTel = this.global.getTel();
+
     this.geolocation.getCurrentPosition().then((resp) => {
       this.latitude = resp.coords.latitude;
       this.longitude = resp.coords.longitude;
@@ -123,12 +126,12 @@ export class ClientPage {
 
   createCustomer() {
     
-    var link = 'https://benoo-v2-api.herokuapp.com/api/customer/'+this.entrepreneurBenooId+'/create';
-    //var link = 'http://benoo-api:8888/api/customer/'+this.entrepreneurBenooId+'/create';
+    var link = this.global.getApiUrl()+'customer/'+this.entrepreneurBenooId+'/create';
       
     console.log("CREATE CUSTOMER");
 
     var data = {
+      entrepreneurTel : this.entrepreneurTel,
       clientLastname : this.clientLastname,
       clientFirstname : this.clientFirstname,
       clientSituation : this.clientSituation,

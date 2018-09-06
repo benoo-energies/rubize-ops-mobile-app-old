@@ -1,0 +1,55 @@
+<!--
+  Generated template for the ServicePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>{{serviceName}}</ion-title>
+    <ion-buttons end>
+        <button ion-button [navPush]="offlineCartPage" [navParams]="offlineCart">
+          <ion-icon name="cart"></ion-icon>
+          <span *ngIf="offlineCart">{{offlineCart.totalProduct}}</span>
+        </button>
+      </ion-buttons>    
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+    <ion-list *ngFor="let service of servicesData" no-padding>
+        <ion-row>
+            <ion-col no-padding>
+              <!-- <ion-card no-padding [navPush]="pageService" [navParams]='{serviceId : service.id}'> -->
+              <ion-card no-padding >
+                <ion-row>
+                  <ion-col col-4 class="service-img">
+                    <img src="./assets/imgs/{{service.picture}}" alt="">
+                  </ion-col>
+                  <ion-col col-6>
+                    <div class="card-title" >{{service.title}}</div>
+                    <div class="price">{{service.price_fcfa}} Fcfa</div>
+                  </ion-col>
+                  <ion-col *ngIf="offlineCart && offlineCart.products[service.id]; else templateName" col-2 class="icon added" >
+                      <div class="item-add" (click)="addItemToCart(offlineCart, service.id, service.title, service.price_fcfa, service.picture, service.decimal)">
+                        <ion-icon name="add"></ion-icon>
+                      </div>
+                      <div class="item-qty">
+                          <span>{{offlineCart.products[service.id].qty}}</span>
+                      </div>
+                      <div class="item-remove" (click)="removeItemToCart(offlineCart, service.id, service.title, service.price_fcfa, service.picture, service.decimal)">
+                          <ion-icon name="remove"></ion-icon>
+                      </div>
+                  </ion-col>
+                  <ng-template #templateName>                    
+                    <ion-col col-2 class="empty icon" (click)="addItemToCart(offlineCart, service.id, service.title, service.price_fcfa, service.picture, service.decimal)">
+                        <ion-icon name="add"></ion-icon>
+                    </ion-col>
+                  </ng-template>
+                </ion-row>
+              </ion-card>
+            </ion-col>
+          </ion-row>
+      </ion-list>
+</ion-content>
