@@ -1,1 +1,40 @@
-webpackJsonp([4],{361:function(a,e,n){"use strict";Object.defineProperty(e,"__esModule",{value:!0});var r=n(0),_=(n(2),n(9),n(142)),t=function(){return function(){}}(),u=n(259),i=n(260),c=n(261),o=n(262),f=n(263),d=n(264),b=n(265),s=n(266),j=n(267),k=n(280),l=n(10),p=n(27),v=n(182),O=n(69);n.d(e,"OfflineOrdersPageModuleNgFactory",function(){return g});var g=r.W(t,[],function(a){return r._10([r._11(512,r.i,r.S,[[8,[u.a,i.a,c.a,o.a,f.a,d.a,b.a,s.a,j.a,k.a]],[3,r.i],r.s]),r._11(4608,l.k,l.j,[r.r,[2,l.u]]),r._11(4608,p.k,p.k,[]),r._11(4608,p.c,p.c,[]),r._11(512,l.b,l.b,[]),r._11(512,p.j,p.j,[]),r._11(512,p.d,p.d,[]),r._11(512,p.i,p.i,[]),r._11(512,v.a,v.a,[]),r._11(512,v.b,v.b,[]),r._11(512,t,t,[]),r._11(256,O.a,_.a,[])])})}});
+webpackJsonp([4],{
+
+/***/ 375:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "OfflineOrdersPageModule", function() { return OfflineOrdersPageModule; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__offline_orders__ = __webpack_require__(150);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+
+
+var OfflineOrdersPageModule = (function () {
+    function OfflineOrdersPageModule() {
+    }
+    OfflineOrdersPageModule = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
+            declarations: [],
+            imports: [
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__offline_orders__["a" /* OfflineOrdersPage */]),
+            ],
+        })
+    ], OfflineOrdersPageModule);
+    return OfflineOrdersPageModule;
+}());
+
+//# sourceMappingURL=offline-orders.module.js.map
+
+/***/ })
+
+});
+//# sourceMappingURL=4.js.map

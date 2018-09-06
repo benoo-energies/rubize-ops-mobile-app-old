@@ -23,16 +23,22 @@ export class OfflineCartPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage, public toastCtrl: ToastController, public loading: LoadingController, private alertCtrl: AlertController) {
     this.cartTotal = 0;
-    this.getCart();
+    this.storage.get('offlineCart').then((resp) => {
+      if(resp !== null){
+        this.offlineCart = resp;
+        this.offlineCart.products.forEach(function (obj) {
+          if( obj && obj.price && obj.qty) { 
+            this.cartTotal+= obj.price * obj.qty; 
+          }
+        }, this);
+      }
+    });
   }
 
   getCart() {
     this.storage.get('offlineCart').then((resp) => {
       if(resp !== null){
         this.offlineCart = resp;
-        this.offlineCart.products.forEach(function (obj) {
-          if( obj && obj.price && obj.qty) { this.cartTotal+= obj.price * obj.qty; }
-        }, this);
       }
     });
   }
@@ -43,7 +49,6 @@ export class OfflineCartPage {
 
 
   emptyCart() {
-    console.log("EMPTY");
     this.offlineCart = { products:[],totalProduct:0};
     this.storage.set('offlineCart', this.offlineCart);   
   }
@@ -65,10 +70,10 @@ export class OfflineCartPage {
           text: 'Confirmer',
           handler: () => {
             this.storage.get('offlineSales').then((resp) => {
-              console.log(resp);
               let tmpJson = [{
                 date:Math.floor(Date.now() / 1000),
-                detail : this.offlineCart
+                detail : this.offlineCart,
+                total : this.cartTotal
               }];              
 
               if(resp !== null){

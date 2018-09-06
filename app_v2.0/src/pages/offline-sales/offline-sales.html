@@ -3,7 +3,7 @@
       <ion-title>Services</ion-title>
       <ion-buttons end>
           <!-- <button ion-button [navPush]="pageCart" [navParams]="offlineCart"> -->
-          <button ion-button>
+          <button ion-button [navPush]="offlineCartPage" [navParams]="offlineCart">
             <ion-icon name="cart"></ion-icon>&nbsp;
             <span *ngIf="offlineCart">{{offlineCart.totalProduct}}</span>
           </button>

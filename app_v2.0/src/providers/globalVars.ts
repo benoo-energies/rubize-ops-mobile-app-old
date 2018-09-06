@@ -33,8 +33,8 @@ export class GlobalVars {
   }
 
   getApiUrl() {
-    //return "http://benoo-api:8888/api/";
-    return "https://benoo-v2-api.herokuapp.com/api/";
+    return "http://benoo-api:8888/api/";
+    //return "https://benoo-v2-api.herokuapp.com/api/";
   }
 
 }

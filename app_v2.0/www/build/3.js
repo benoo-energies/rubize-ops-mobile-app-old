@@ -1,1 +1,40 @@
-webpackJsonp([3],{362:function(a,n,e){"use strict";Object.defineProperty(n,"__esModule",{value:!0});var _=e(0),r=(e(2),e(9),e(137)),t=function(){return function(){}}(),u=e(259),c=e(260),i=e(261),o=e(262),f=e(263),d=e(264),b=e(265),s=e(266),j=e(267),k=e(281),l=e(10),p=e(27),v=e(182),P=e(69);e.d(n,"OfflineProductsPageModuleNgFactory",function(){return g});var g=_.W(t,[],function(a){return _._10([_._11(512,_.i,_.S,[[8,[u.a,c.a,i.a,o.a,f.a,d.a,b.a,s.a,j.a,k.a]],[3,_.i],_.s]),_._11(4608,l.k,l.j,[_.r,[2,l.u]]),_._11(4608,p.k,p.k,[]),_._11(4608,p.c,p.c,[]),_._11(512,l.b,l.b,[]),_._11(512,p.j,p.j,[]),_._11(512,p.d,p.d,[]),_._11(512,p.i,p.i,[]),_._11(512,v.a,v.a,[]),_._11(512,v.b,v.b,[]),_._11(512,t,t,[]),_._11(256,P.a,r.a,[])])})}});
+webpackJsonp([3],{
+
+/***/ 376:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "OfflineProductsPageModule", function() { return OfflineProductsPageModule; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__offline_products__ = __webpack_require__(145);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+
+
+var OfflineProductsPageModule = (function () {
+    function OfflineProductsPageModule() {
+    }
+    OfflineProductsPageModule = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
+            declarations: [],
+            imports: [
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__offline_products__["a" /* OfflineProductsPage */]),
+            ],
+        })
+    ], OfflineProductsPageModule);
+    return OfflineProductsPageModule;
+}());
+
+//# sourceMappingURL=offline-products.module.js.map
+
+/***/ })
+
+});
+//# sourceMappingURL=3.js.map

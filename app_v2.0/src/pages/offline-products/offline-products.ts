@@ -29,7 +29,6 @@ export class OfflineProductsPage {
     this.storage.get('offlineCart').then((resp) => {
       if(resp !== null){
         this.offlineCart = resp;
-        console.log(resp);
       }
     });    
   }
@@ -38,10 +37,6 @@ export class OfflineProductsPage {
     this.storage.get('entrepreneur_products').then((resp) => {
       if(resp !== null){
         this.servicesData = resp[ind].products;
-        console.log(ind);
-        console.log(resp[ind]);
-        console.log(resp[ind].products);
-        console.log(resp);
       }
     });
   }
@@ -51,7 +46,6 @@ export class OfflineProductsPage {
     this.storage.get('offlineCart').then((resp) => {
       if(resp !== null){
         this.offlineCart = resp;
-        console.log(resp);
       }
     });    
   }
@@ -59,7 +53,6 @@ export class OfflineProductsPage {
 
   addItemToCart(cartObj, productId, productTitle, productPrice, productPicture, productDecimal) {
     var item:any = cartObj;
-    console.log(productId);
 
     if(item.products[productId]) {
       var newVal:number;
@@ -77,7 +70,6 @@ export class OfflineProductsPage {
     item.totalProduct = item.totalProduct + 1;
     this.storage.set('offlineCart', item).then((data) => {
       this.offlineCart = data;
-      console.log(data);
     });
   }
   

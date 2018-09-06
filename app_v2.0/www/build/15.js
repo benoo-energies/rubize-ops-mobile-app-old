@@ -1,1 +1,40 @@
-webpackJsonp([15],{349:function(a,n,_){"use strict";Object.defineProperty(n,"__esModule",{value:!0});var e=_(0),r=(_(2),_(9),_(92)),t=function(){return function(){}}(),u=_(259),c=_(260),i=_(261),o=_(262),b=_(263),d=_(264),f=_(265),s=_(266),j=_(267),k=_(268),l=_(10),p=_(27),v=_(182),g=_(69);_.d(n,"CartPageModuleNgFactory",function(){return y});var y=e.W(t,[],function(a){return e._10([e._11(512,e.i,e.S,[[8,[u.a,c.a,i.a,o.a,b.a,d.a,f.a,s.a,j.a,k.a]],[3,e.i],e.s]),e._11(4608,l.k,l.j,[e.r,[2,l.u]]),e._11(4608,p.k,p.k,[]),e._11(4608,p.c,p.c,[]),e._11(512,l.b,l.b,[]),e._11(512,p.j,p.j,[]),e._11(512,p.d,p.d,[]),e._11(512,p.i,p.i,[]),e._11(512,v.a,v.a,[]),e._11(512,v.b,v.b,[]),e._11(512,t,t,[]),e._11(256,g.a,r.a,[])])})}});
+webpackJsonp([15],{
+
+/***/ 364:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CartPageModule", function() { return CartPageModule; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__cart__ = __webpack_require__(84);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+
+
+var CartPageModule = (function () {
+    function CartPageModule() {
+    }
+    CartPageModule = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
+            declarations: [],
+            imports: [
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__cart__["a" /* CartPage */]),
+            ],
+        })
+    ], CartPageModule);
+    return CartPageModule;
+}());
+
+//# sourceMappingURL=cart.module.js.map
+
+/***/ })
+
+});
+//# sourceMappingURL=15.js.map
