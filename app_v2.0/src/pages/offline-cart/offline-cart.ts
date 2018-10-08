@@ -20,6 +20,7 @@ export class OfflineCartPage {
   offlineCart : any;
   cartTotal : any;
   offlineSales : any;
+  paymentType  :any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage, public toastCtrl: ToastController, public loading: LoadingController, private alertCtrl: AlertController) {
     this.cartTotal = 0;
@@ -73,7 +74,8 @@ export class OfflineCartPage {
               let tmpJson = [{
                 date:Math.floor(Date.now() / 1000),
                 detail : this.offlineCart,
-                total : this.cartTotal
+                total : this.cartTotal,
+                paymentType : this.paymentType
               }];              
 
               if(resp !== null){

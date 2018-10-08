@@ -150,7 +150,6 @@ export class MenuPage {
       .map(res => res.json())
       .subscribe((data)=>
       {
-        console.log(data);
         
           if(data.status == true) {
               loader.dismiss();
@@ -158,21 +157,20 @@ export class MenuPage {
                 this.offlineSales = null;
                 this.storage.set('offlineSales',null);             
                 let toast = this.toastCtrl.create({
-                  message: "Enquête(s) synchronisée(s) avec succès !",
+                  message: "Vente(s) synchronisée(s) avec succès !",
                   duration: 5000,
                   position: 'bottom',
                   cssClass:"success"
                 });           
                 toast.present();
           } else {
-            console.log('ERROR 1');
               loader.dismiss();
               this.offlineSales = data.offlineSales;
     
               this.storage.set('offlineSales', data.offlineSales);
               
               let toast = this.toastCtrl.create({
-                message: "Toutes les enquêtes n'ont pas pu être synchronisées. Veuillez vérifier votre connexion et réessayer.",
+                message: "Toutes les ventes n'ont pas pu être synchronisées. Veuillez vérifier votre connexion et réessayer.",
                 duration: 5000,
                 position: 'bottom',
                 cssClass:"danger"
@@ -182,11 +180,9 @@ export class MenuPage {
          
 
       }, error => {
-        console.log('ERROR 2');
-        console.log(error);
           loader.dismiss();
           let toast = this.toastCtrl.create({
-            message: "Toutes les enquêtes n'ont pas pu être synchronisées. Veuillez vérifier votre connexion et réessayer.",
+            message: "Toutes les ventes n'ont pas pu être synchronisées. Veuillez vérifier votre connexion et réessayer.",
             duration: 5000,
             position: 'bottom',
             cssClass:"danger"

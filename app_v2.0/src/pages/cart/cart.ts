@@ -36,6 +36,7 @@ export class CartPage {
   checkClientRes  :any;
   clientLastname  :any;
   clientFirstname  :any;
+  paymentType  :any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage, private modal:ModalController, public http: Http, public toastCtrl: ToastController, public loading: LoadingController, private global: GlobalVars, private alertCtrl: AlertController) {
     this.cartTotal = 0;
@@ -171,6 +172,7 @@ export class CartPage {
               clientTel : this.clientTel,
               products : this.cartObj.products,
               total : this.cartTotal,
+              paymentType : this.paymentType,
               comission : comission
             }    
         

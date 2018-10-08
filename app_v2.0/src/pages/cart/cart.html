@@ -43,8 +43,19 @@
     <div *ngIf="entrepreneurAC && (entrepreneurAC < cartTotal * 0.2)">
       <p class="disabled"><ion-icon name="alert"></ion-icon>&nbsp; Votre solde actuel  ({{entrepreneurAC}} Fcfa) est insuffisant, veuillez modifier votre panier ou recharger votre compte.</p>
     </div> -->
-    
-    <button ion-button block large color="success"  (click)="sendPayment(cartTotal)" class="validate-btn">Valider le paiement</button>
+
+    <p>Type de paiement : </p>
+    <ion-list radio-group [(ngModel)]="paymentType">
+      <ion-item>
+        <ion-label>Cash</ion-label>
+        <ion-radio value="cash" ></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Mobile</ion-label>
+        <ion-radio value="mobile"></ion-radio>
+      </ion-item>
+    </ion-list>
+    <button ion-button block large color="success" [disabled]="paymentType == null || paymentType == ''"   (click)="sendPayment(cartTotal)" class="validate-btn">Valider le paiement</button>
 
     <div *ngIf="cartObj && cartObj.totalProduct > 0">
         <div no-padding class="cancel">

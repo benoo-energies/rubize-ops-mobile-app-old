@@ -21,14 +21,14 @@
       <ion-input [hidden]="true" ></ion-input>
     </ion-list>
     <button ion-button block large color="white" [disabled]="entrepreneurTel == null || entrepreneurTel == '' || entrepreneurPin == null || entrepreneurPin == ''" (click)="checkConnection()" >Connexion</button>
+    <button ion-button block large color="secondary" class="survey" (click)="displayOfflineSales()">Ventes hors-ligne</button>
 
     <button ion-button block large color="secondary" class="survey" (click)="displaySurvey()">Enquête prospect</button>
     <button *ngIf="offlineData && offlineData.surveys && offlineData.surveys.length > 0" ion-button block large color="danger" class="survey" (click)="postOfflineSurvey()" [disabled]="!onlineStatus">Synchro. enquêtes ({{offlineData['surveys'].length}})</button>
 
-    <button ion-button block large color="secondary" class="survey" (click)="displayOfflineSales()">Ventes hors-ligne</button>
     
 
-    <button ion-button block large color="secondary" class="survey" (click)="offlineOrders()">Suivi de commandes</button>
+    <!-- <button ion-button block large color="secondary" class="survey" (click)="offlineOrders()">Suivi de commandes</button> -->
   </ion-content>
   
   
