@@ -1,1 +1,40 @@
-webpackJsonp([11],{353:function(a,e,n){"use strict";Object.defineProperty(e,"__esModule",{value:!0});var r=n(0),t=(n(2),n(9),n(138)),u=function(){return function(){}}(),_=n(259),c=n(260),i=n(261),o=n(262),d=n(263),b=n(264),f=n(265),s=n(266),j=n(267),k=n(273),p=n(10),l=n(25),v=n(182),P=n(70);n.d(e,"EntrepreneurProductPageModuleNgFactory",function(){return g});var g=r.W(u,[],function(a){return r._10([r._11(512,r.i,r.S,[[8,[_.a,c.a,i.a,o.a,d.a,b.a,f.a,s.a,j.a,k.a]],[3,r.i],r.s]),r._11(4608,p.k,p.j,[r.r,[2,p.u]]),r._11(4608,l.k,l.k,[]),r._11(4608,l.c,l.c,[]),r._11(512,p.b,p.b,[]),r._11(512,l.j,l.j,[]),r._11(512,l.d,l.d,[]),r._11(512,l.i,l.i,[]),r._11(512,v.a,v.a,[]),r._11(512,v.b,v.b,[]),r._11(512,u,u,[]),r._11(256,P.a,t.a,[])])})}});
+webpackJsonp([11],{
+
+/***/ 367:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EntrepreneurProductPageModule", function() { return EntrepreneurProductPageModule; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__entrepreneur_product__ = __webpack_require__(146);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+
+
+var EntrepreneurProductPageModule = (function () {
+    function EntrepreneurProductPageModule() {
+    }
+    EntrepreneurProductPageModule = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
+            declarations: [],
+            imports: [
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__entrepreneur_product__["a" /* EntrepreneurProductPage */]),
+            ],
+        })
+    ], EntrepreneurProductPageModule);
+    return EntrepreneurProductPageModule;
+}());
+
+//# sourceMappingURL=entrepreneur-product.module.js.map
+
+/***/ })
+
+});
+//# sourceMappingURL=11.js.map
